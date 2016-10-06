@@ -1,5 +1,5 @@
 {
-  "name": "oc",
+  "name": "raise-oc",
   "version": "0.33.9",
   "description": "A framework for developing and distributing html components",
   "main": "./src/index.js",

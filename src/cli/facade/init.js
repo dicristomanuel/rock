@@ -7,7 +7,7 @@ var strings = require('../../resources/index');
 var wrapCliCallback = require('../wrap-cli-callback');
 
 module.exports = function(dependencies){
-  
+
   var local = dependencies.local,
       logger = dependencies.logger;
 
@@ -20,6 +20,7 @@ module.exports = function(dependencies){
     callback = wrapCliCallback(callback);
 
     local.init(componentName, templateType, function(err, res){
+      console.log('in the INIT function');
       if(err){
         if(err === 'name not valid'){
           err = errors.NAME_NOT_VALID;
