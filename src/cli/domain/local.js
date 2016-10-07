@@ -37,17 +37,20 @@ module.exports = function(dependencies){
       try {
 
         var pathDir = '../../components/base-component-' + templateType,
-            baseComponentDir = path.resolve(__dirname, pathDir),
-            npmIgnorePath = path.resolve(__dirname, pathDir + '/.npmignore');
+        baseComponentDir = path.resolve(__dirname, pathDir),
+        npmIgnorePath = path.resolve(__dirname, pathDir + '/.npmignore');
 
         fs.ensureDirSync(componentName);
         fs.copySync(baseComponentDir, componentName);
         fs.copySync(npmIgnorePath, componentName + '/.gitignore');
 
         var componentPath = path.resolve(componentName, 'package.json'),
-          component = _.extend(fs.readJsonSync(componentPath), {
-            name: componentName
-          });
+        component = _.extend(fs.readJsonSync(componentPath), {
+          name: componentName,
+          devDependencies: {
+            lerna: "2.0.0-beta.24"
+          }
+        });
 
         fs.outputJsonSync(componentPath, component);
 
