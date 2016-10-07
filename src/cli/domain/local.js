@@ -33,9 +33,8 @@ module.exports = function(dependencies){
       if(!validator.validateTemplateType(templateType)){
         return callback('template type not valid');
       }
-
+      // if template type react
       try {
-
         var pathDir = '../../components/base-component-' + templateType,
         baseComponentDir = path.resolve(__dirname, pathDir),
         npmIgnorePath = path.resolve(__dirname, pathDir + '/.npmignore');
@@ -43,23 +42,34 @@ module.exports = function(dependencies){
         fs.ensureDirSync(componentName);
         fs.copySync(baseComponentDir, componentName);
         fs.copySync(npmIgnorePath, componentName + '/.gitignore');
-
+// add .gitignore
+// react setup
+// index.js with export name
         var componentPath = path.resolve(componentName, 'package.json'),
         component = _.extend(fs.readJsonSync(componentPath), {
           name: componentName,
+           dependencies: {
+            "babel-core": "^6.17.0",
+            "babel-loader": "^6.2.5",
+            "babel-preset-es2015": "^6.16.0"
+          },
           devDependencies: {
-            lerna: "2.0.0-beta.24"
+            "css-loader": "^0.9.0",
+            "extract-text-webpack-plugin": "^0.3.5",
+            "style-loader": "^0.8.2",
+            "stylus-loader": "^0.4.0",
+            "webpack": "^1.4.13",
+            "webpack-dev-server": "^1.6.6"
           }
-        });
+        })
+      fs.outputJsonSync(componentPath, component);
 
-        fs.outputJsonSync(componentPath, component);
-
-        return callback(null, { ok: true });
-      } catch(e){
-        return callback(e);
-      }
-    },
-    mock: mock(),
-    package: packageComponents()
-  });
+      return callback(null, { ok: true });
+    } catch(e){
+      return callback(e);
+    }
+  },
+  mock: mock(),
+  package: packageComponents()
+});
 };
