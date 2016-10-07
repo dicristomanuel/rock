@@ -22,7 +22,7 @@ module.exports = function(conf){
   var getFilePath = function(component, version, filePath){
     return format('{0}/{1}/{2}/{3}', conf.s3.componentsDir, component, version, filePath);
   };
-  
+
   var local = {
     getCompiledView: function(componentName, componentVersion){
       if(componentName === 'oc-client'){
@@ -31,7 +31,7 @@ module.exports = function(conf){
 
       return fs.readFileSync(path.join(conf.path, componentName + '/_package/template.js')).toString();
     },
-    getComponents: function(){ 
+    getComponents: function(){
 
       var validComponents = fs.readdirSync(conf.path).filter(function(file){
         var isDir = fs.lstatSync(path.join(conf.path, file)).isDirectory(),
@@ -44,7 +44,7 @@ module.exports = function(conf){
 
       validComponents.push('oc-client');
       return validComponents;
-    }, 
+    },
     getComponentVersions: function(componentName, callback){
       if(componentName === 'oc-client'){
         return callback(null, [fs.readJsonSync(path.join(__dirname, '../../../package.json')).version]);
@@ -83,7 +83,7 @@ module.exports = function(conf){
       }
 
       this.getComponentVersions(componentName, function(err, availableVersions){
-        
+
         if(err){
           return callback(err);
         }
@@ -118,11 +118,11 @@ module.exports = function(conf){
           componentInfo = fs.readJsonSync(path.join(conf.path, componentName + '/_package/package.json'));
         }
 
-        if(componentInfo.version === componentVersion){
+        // if(componentInfo.version === componentVersion){
           return callback(null, componentInfo);
-        } else {
-          return callback('version not available');
-        }
+        // } else {
+          // return callback('version not available');
+        // }
       }
 
       cdn.getFile(getFilePath(componentName, componentVersion, 'package.json'), function(err, component){
@@ -217,7 +217,7 @@ module.exports = function(conf){
       }
 
       this.getComponentVersions(componentName, function(err, componentVersions){
-        
+
         if(!versionHandler.validateNewVersion(componentVersion, componentVersions)){
           return callback({
             code: strings.errors.registry.COMPONENT_VERSION_ALREADY_FOUND_CODE,
