@@ -36,7 +36,7 @@ var copyDir = function(params, cb){
 
     nodeDir.paths(staticPath, function(err, res){
       _.forEach(res.files, function(filePath){
-    
+
         var fileName = path.basename(filePath),
             fileExt = path.extname(filePath).toLowerCase(),
             fileRelativePath = path.relative(staticPath, path.dirname(filePath)),

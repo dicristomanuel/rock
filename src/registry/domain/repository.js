@@ -16,8 +16,8 @@ var versionHandler = require('./version-handler');
 module.exports = function(conf){
 
   var cdn = !conf.local && new S3(conf),
-      repositorySource = conf.local ? 'local repository' : 's3 cdn',
-      componentsCache = new ComponentsCache(conf, cdn);
+  repositorySource = conf.local ? 'local repository' : 's3 cdn',
+  componentsCache = new ComponentsCache(conf, cdn);
 
   var getFilePath = function(component, version, filePath){
     return format('{0}/{1}/{2}/{3}', conf.s3.componentsDir, component, version, filePath);
@@ -28,16 +28,15 @@ module.exports = function(conf){
       if(componentName === 'oc-client'){
         return fs.readFileSync(path.join(__dirname, '../../components/oc-client/_package/template.js')).toString();
       }
-
       return fs.readFileSync(path.join(conf.path, componentName + '/_package/template.js')).toString();
     },
     getComponents: function(){
 
       var validComponents = fs.readdirSync(conf.path).filter(function(file){
         var isDir = fs.lstatSync(path.join(conf.path, file)).isDirectory(),
-            isValidComponent = isDir ? (fs.readdirSync(path.join(conf.path, file)).filter(function(file){
-              return file === '_package';
-            }).length === 1) : false;
+        isValidComponent = isDir ? (fs.readdirSync(path.join(conf.path, file)).filter(function(file){
+          return file === '_package';
+        }).length === 1) : false;
 
         return isValidComponent;
       });
@@ -60,7 +59,6 @@ module.exports = function(conf){
       if(componentName === 'oc-client'){
         return fs.readFileSync(path.join(__dirname, '../../components/oc-client/_package/server.js')).toString();
       }
-
       return fs.readFileSync(path.join(conf.path, componentName + '/_package/server.js')).toString();
     }
   };
@@ -119,9 +117,9 @@ module.exports = function(conf){
         }
 
         // if(componentInfo.version === componentVersion){
-          return callback(null, componentInfo);
+        return callback(null, componentInfo);
         // } else {
-          // return callback('version not available');
+        // return callback('version not available');
         // }
       }
 

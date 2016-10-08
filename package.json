@@ -1,6 +1,6 @@
 {
   "name": "raise-oc",
-  "version": "0.0.43",
+  "version": "0.0.56",
   "description": "A framework for developing and distributing html components",
   "main": "./src/index.js",
   "bin": {

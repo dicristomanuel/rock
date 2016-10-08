@@ -10,7 +10,6 @@ var packageJson = require('../package');
 module.exports = function(grunt){
 
   grunt.registerTask('build', 'Builds and minifies the oc-client component', function(){
-
     var done = this.async(),
         version = packageJson.version,
         clientComponentDir = '../src/components/oc-client/',

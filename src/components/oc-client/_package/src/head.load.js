@@ -433,7 +433,7 @@
                 // release event listeners
                 ele.onload = ele.onreadystatechange = ele.onerror = null;
 
-                // do callback   
+                // do callback
                 callback();
             }
         }
@@ -473,7 +473,7 @@
 
             // Set counter to zero
             asset.cssRetries = 0;
-            asset.cssTimeout = win.setTimeout(isCssLoaded, 500);         
+            asset.cssTimeout = win.setTimeout(isCssLoaded, 500);
         }
         else {
             ele      = doc.createElement("script");
@@ -503,7 +503,7 @@
         // use insertBefore to keep IE from throwing Operation Aborted (thx Bryan Forbes!)
         var head = doc.head || doc.getElementsByTagName("head")[0];
 
-        // but insert at end of head, because otherwise if it is a stylesheet, it will not override values      
+        // but insert at end of head, because otherwise if it is a stylesheet, it will not override values
         head.insertBefore(ele, head.lastChild);
     }
 

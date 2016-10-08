@@ -25,9 +25,9 @@ var compileView = function(viewPath, type) {
       compileDebug: false,
       name: 't'
     }).toString().replace('function t(locals) {', 'function(locals){');
-  } else if(type === 'handlebars'){
+  } else if(type === 'handlebars' || 'react'){
     preCompiledView = handlebars.precompile(template);
-  } else if (type !== 'react') {
+  } else {
     throw strings.errors.cli.TEMPLATE_TYPE_NOT_VALID;
   }
 
